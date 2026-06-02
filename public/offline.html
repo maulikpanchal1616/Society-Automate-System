@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline | Shyamved Residency</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #F5F1EB;
+      color: #2D2A26;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 { color: #C56E4D; }
+    p { color: #54504B; max-width: 400px; }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #C56E4D;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C56E4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0119 12.55M5 12.55a10.94 10.94 0 015.17-2.39M10.71 5.05A16 16 0 0122.58 9M1.42 9a15.91 15.91 0 014.7-2.88M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
+  </svg>
+  <h1>You are offline</h1>
+  <p>Please check your internet connection and try again.</p>
+  <button onclick="window.location.reload()">Retry</button>
+</body>
+</html>
