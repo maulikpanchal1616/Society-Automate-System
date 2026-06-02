@@ -198,7 +198,7 @@ export default function WaterEntryClient({
               {!isEditing && (
                 <div className="mt-2 flex items-center justify-between border-t border-slate-800/40 pt-2 text-[10px]">
                    <span className="text-slate-400">Previous Reading:</span>
-                   <span className="font-mono text-slate-200 bg-slate-800/50 px-2 py-0.5 rounded">{house.previous_reading.toFixed(1)}</span>
+                   <span className="font-mono text-slate-200 bg-slate-800/50 px-2 py-0.5 rounded">{Number(house.previous_reading || 0).toFixed(1)}</span>
                 </div>
               )}
 
@@ -211,7 +211,7 @@ export default function WaterEntryClient({
 
                   <div className="flex justify-between text-[10px] mb-3 p-2 bg-slate-900 rounded border border-slate-800/60">
                     <span className="text-slate-400">Previous:</span>
-                    <span className="font-mono text-slate-200">{house.previous_reading.toFixed(1)}</span>
+                    <span className="font-mono text-slate-200">{Number(house.previous_reading || 0).toFixed(1)}</span>
                   </div>
 
                   {/* Overwrite Safeguard Warning */}
