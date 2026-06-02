@@ -15,6 +15,9 @@
   --color-sage-light: rgba(122, 139, 116, 0.15);
 
   /* ── Neutrals — Warm Palette ── */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-transparent: transparent;
   --color-surface: #F5F1EB;
   --color-surface-alt: #EFEBE4;
   --color-surface-raised: rgba(255, 255, 255, 0.68);

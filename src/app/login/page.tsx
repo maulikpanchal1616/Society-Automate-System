@@ -6,9 +6,9 @@
 
 import { useState, useTransition } from 'react'
 import { signInWithEmail } from '@/features/auth/actions'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 
-const formVariants = {
+const formVariants: Variants = {
   hidden: { opacity: 0, x: 20 },
   show: {
     opacity: 1,
@@ -23,9 +23,30 @@ const formVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
+}
+
+const glassVariants: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.4,
+      duration: 1.2,
+      ease: "easeOut",
+      staggerChildren: 0.15,
+      delayChildren: 0.6
+    }
+  }
+}
+
+const glassItemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 }
 
 function LoginForm() {
@@ -47,21 +68,24 @@ function LoginForm() {
       variants={formVariants}
       initial="hidden"
       animate="show"
-      className="w-full max-w-md"
+      className="w-full"
     >
-      <div className="mb-10 flex flex-col items-start">
+      <div className="mb-10 flex flex-col items-center text-center">
         <motion.div 
           variants={itemVariants}
-          whileHover={{ scale: 1.05 }}
-          className="w-16 h-16 rounded-2xl bg-white shadow-lg border border-[#E6E1D8] flex items-center justify-center p-2.5 mb-6"
+          className="w-28 h-28 mb-4 mx-auto bg-[#FFF5E1] rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.4)] border border-white/20 overflow-hidden"
         >
-          <img src="/logo.png?v=5" alt="Icon" className="w-full h-full object-contain" />
+          <img 
+            src="/logo.png?v=5" 
+            alt="Shyamved Residency Logo" 
+            className="w-full h-full object-cover"
+          />
         </motion.div>
         
-        <motion.h1 variants={itemVariants} className="text-3xl font-bold tracking-tight mb-2 text-[#2D2A26]">
+        <motion.h1 variants={itemVariants} className="text-4xl font-extrabold tracking-tight mb-2 drop-shadow-md" style={{ color: '#E6D5B8' }}>
           Welcome Back
         </motion.h1>
-        <motion.p variants={itemVariants} className="text-sm font-medium text-[#8C8680]">
+        <motion.p variants={itemVariants} className="text-sm font-semibold drop-shadow" style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
           Sign in to the Shyamved Residency portal
         </motion.p>
       </div>
@@ -72,53 +96,47 @@ function LoginForm() {
             initial={{ opacity: 0, height: 0, y: -10 }}
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
-            className="mb-6 px-4 py-3 rounded-xl text-sm overflow-hidden bg-red-50 text-red-600 border border-red-100 shadow-sm" 
+            className="mb-6 px-4 py-3 rounded-xl text-sm overflow-hidden bg-red-500/20 backdrop-blur-md text-red-100 border border-red-500/40 shadow-lg font-medium" 
           >
             {error}
           </motion.div>
         )}
       </AnimatePresence>
 
-      <form action={handleEmailSubmit} className="space-y-5">
-        <motion.div variants={itemVariants}>
-          <label htmlFor="email" className="block text-xs font-bold text-[#54504B] uppercase tracking-wider mb-2">Email Address</label>
+      <form action={handleEmailSubmit} className="space-y-6">
+        <motion.div variants={itemVariants} className="group">
+          <label htmlFor="email" className="block text-xs font-extrabold text-[#B79B6C] uppercase tracking-widest mb-2 drop-shadow-sm group-hover:text-[#E6D5B8] transition-colors">Email Address</label>
           <motion.div 
-            animate={{ 
-              boxShadow: focusedField === 'email' ? '0 0 0 2px rgba(197,110,77,0.3)' : '0 1px 2px 0 rgba(0,0,0,0.05)' 
-            }}
-            className="relative rounded-xl transition-shadow duration-300 bg-white"
+            className="relative rounded-xl transition-all duration-300 bg-black/20 backdrop-blur-sm border border-white/10 hover:border-white/30 hover:bg-white/5 focus-within:-translate-y-1 focus-within:border-white/40 focus-within:bg-white/10 shadow-sm !outline-none !ring-0"
           >
             <input
               id="email" name="email" type="email" required
               autoComplete="email" placeholder="you@example.com"
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
-              className="w-full px-4 py-3.5 rounded-xl border border-[#E6E1D8] focus:border-[#C56E4D] bg-transparent text-sm outline-none transition-colors"
-              style={{ color: '#2D2A26' }}
+              className="w-full px-4 py-4 rounded-xl !border-none !outline-none !ring-0 focus:!ring-0 focus:!outline-none bg-transparent text-sm text-[#FFFFFF] font-medium placeholder-[#EFEBE4]/50 transition-colors"
+              style={{ outline: 'none', boxShadow: 'none', transition: 'background-color 5000s ease-in-out 0s', WebkitTextFillColor: '#FFFFFF' }}
             />
           </motion.div>
         </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <label htmlFor="password" className="block text-xs font-bold text-[#54504B] uppercase tracking-wider mb-2">Password</label>
+        <motion.div variants={itemVariants} className="group">
+          <label htmlFor="password" className="block text-xs font-extrabold text-[#B79B6C] uppercase tracking-widest mb-2 drop-shadow-sm group-hover:text-[#E6D5B8] transition-colors">Password</label>
           <motion.div 
-            animate={{ 
-              boxShadow: focusedField === 'password' ? '0 0 0 2px rgba(197,110,77,0.3)' : '0 1px 2px 0 rgba(0,0,0,0.05)' 
-            }}
-            className="relative rounded-xl transition-shadow duration-300 bg-white"
+            className="relative rounded-xl transition-all duration-300 bg-black/20 backdrop-blur-sm border border-white/10 hover:border-white/30 hover:bg-white/5 focus-within:-translate-y-1 focus-within:border-white/40 focus-within:bg-white/10 shadow-sm !outline-none !ring-0"
           >
             <input
               id="password" name="password" type={showPassword ? "text" : "password"} required
               autoComplete="current-password" placeholder="••••••••"
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              className="w-full px-4 py-3.5 rounded-xl border border-[#E6E1D8] focus:border-[#C56E4D] bg-transparent text-sm outline-none transition-colors pr-12"
-              style={{ color: '#2D2A26' }}
+              className="w-full px-4 py-4 rounded-xl !border-none !outline-none !ring-0 focus:!ring-0 focus:!outline-none bg-transparent text-sm text-[#FFFFFF] font-medium placeholder-[#EFEBE4]/50 transition-colors pr-12"
+              style={{ outline: 'none', boxShadow: 'none', transition: 'background-color 5000s ease-in-out 0s', WebkitTextFillColor: '#FFFFFF' }}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8C8680] hover:text-[#C56E4D] transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#EFEBE4]/50 hover:text-[#E6D5B8] transition-colors hover:scale-110 active:scale-95"
               title={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? (
@@ -141,8 +159,8 @@ function LoginForm() {
             disabled={isPending} 
             whileHover={{ scale: isPending ? 1 : 1.02, y: -2 }}
             whileTap={{ scale: isPending ? 1 : 0.98 }}
-            className="relative w-full overflow-hidden rounded-xl text-white font-bold tracking-wide text-sm py-4 shadow-lg disabled:opacity-70 group"
-            style={{ background: 'linear-gradient(135deg, #C56E4D, #9E583E)' }}
+            className="relative w-full overflow-hidden rounded-xl text-white font-bold tracking-wide text-sm py-4 shadow-[0_8px_20px_rgba(197,110,77,0.3)] disabled:opacity-70 group border border-white/10"
+            style={{ background: 'linear-gradient(135deg, rgba(197,110,77,0.9), rgba(158,88,62,0.9))' }}
           >
             {/* Animated hover glow inside button */}
             <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out" />
@@ -161,71 +179,56 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-dvh bg-[#F5F1EB] overflow-hidden">
+    <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-black p-4 sm:p-8 lg:p-24 fixed inset-0">
       
-      {/* LEFT COMPARTMENT - 3D Visual Showcase */}
-      <div className="hidden lg:block lg:w-[55%] relative overflow-hidden bg-black">
-        <motion.div 
-          animate={{ scale: [1, 1.08, 1] }} 
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0"
-        >
-          {/* This uses the generated 3D aesthetic image */}
-          <img 
-            src="/login-bg.png" 
-            alt="Shyamved Residency 3D Render" 
-            className="w-full h-full object-cover object-center opacity-90"
-          />
-        </motion.div>
-
-        {/* Cinematic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-        
-        {/* Animated Orbs for Depth */}
-        <motion.div 
-          animate={{ y: [0, -50, 0], x: [0, 30, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#C56E4D]/20 blur-[100px] rounded-full mix-blend-screen"
+      {/* FULL PAGE BACKGROUND */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/login-bg.png" 
+          alt="Shyamved Residency 3D Render" 
+          className="w-full h-full object-cover object-center opacity-85"
         />
-        
-        {/* Floating Text Element */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="absolute bottom-16 left-16 max-w-lg"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-0.5 w-10 bg-[#C56E4D]" />
-            <p className="text-white/80 text-sm font-bold tracking-widest uppercase">Premium Living</p>
-          </div>
-          <h2 className="text-4xl font-light text-white leading-tight mb-4">
-            Experience the pinnacle of <br />
-            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Modern Management.</span>
-          </h2>
-          <p className="text-white/60 text-sm leading-relaxed">
-            Welcome to the Shyamved Residency digital twin. Control, monitor, and optimize your society operations from a single unified ecosystem.
-          </p>
-        </motion.div>
       </div>
 
-      {/* RIGHT COMPARTMENT - Login Form */}
-      <div className="w-full lg:w-[45%] flex flex-col justify-center px-6 sm:px-12 md:px-20 lg:px-24 relative z-10 bg-[#F5F1EB] shadow-[-20px_0_40px_rgba(0,0,0,0.05)]">
-        
-        {/* Mobile Background Fallback (Only visible on mobile) */}
-        <div className="absolute inset-0 lg:hidden overflow-hidden z-[-1]">
-          <img src="/login-bg.png" alt="Background" className="w-full h-full object-cover opacity-[0.08]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1EB]/80 to-[#F5F1EB]" />
-        </div>
+      {/* Cinematic Overlays */}
+      <div className="absolute inset-0 z-0 bg-black/10" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+      
+      {/* Animated Orbs for Depth */}
+      <motion.div 
+        animate={{ y: [0, -50, 0], x: [0, 30, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#C56E4D]/20 blur-[120px] rounded-full mix-blend-screen z-0 pointer-events-none"
+      />
+      
+      {/* FLOATING TEXT REMOVED PER USER REQUEST */}
 
-        <LoginForm />
+      {/* RIGHT COMPARTMENT - Glassmorphism Login Form */}
+      <div className="relative z-20 w-full max-w-[460px] flex flex-col">
+        <motion.div
+          initial={{ opacity: 0, y: 30, backdropFilter: "blur(0px)" }}
+          animate={{ opacity: 1, y: 0, backdropFilter: "blur(6px)" }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="w-full p-8 sm:p-10 rounded-[2.5rem] bg-black/20 backdrop-blur-sm border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden relative group"
+        >
+          {/* Subtle interior glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+          
+          <div className="relative z-10">
+            <LoginForm />
+          </div>
+        </motion.div>
 
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center lg:justify-start lg:pl-24">
-          <p className="text-xs text-[#8C8680] font-medium tracking-wide">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs text-white/40 font-medium tracking-wide">
             © {new Date().getFullYear()} Shyamved Residency. All rights reserved.
           </p>
-        </div>
+        </motion.div>
       </div>
 
     </div>

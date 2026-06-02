@@ -262,7 +262,7 @@ export default function ChairmanBillingClient({
         />
 
         {/* Month selector & Generation controls */}
-        <div className="flex flex-wrap items-center gap-4 w-full md:w-auto shrink-0 justify-between md:justify-end">
+        <div className="flex flex-wrap items-end gap-4 w-full md:w-auto shrink-0 justify-between md:justify-end">
           {totalCount === 0 && (
              <button
                 onClick={handlePreviewBills}
@@ -273,7 +273,7 @@ export default function ChairmanBillingClient({
              </button>
           )}
 
-          <div className="flex items-center ml-auto md:ml-0">
+          <div className="flex items-end ml-auto md:ml-0">
               <BillingMonthSelector 
               activeMonth={activeMonth} 
               onChange={handleMonthChange}

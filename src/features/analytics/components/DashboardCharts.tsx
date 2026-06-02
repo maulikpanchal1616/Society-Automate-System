@@ -21,7 +21,7 @@ export function CollectionTrendChart({ data }: { data: any[] }) {
             <Tooltip 
               cursor={{ fill: '#F5F1EB' }}
               contentStyle={{ borderRadius: '8px', border: '1px solid #E6E1D8', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-              formatter={(value: number) => [formatCurrency(value), 'Collected']}
+              formatter={(value: any) => [formatCurrency(Number(value)), 'Collected']}
             />
             <Bar dataKey="Collected" fill="#7A8B74" radius={[4, 4, 0, 0]} barSize={30} />
           </BarChart>

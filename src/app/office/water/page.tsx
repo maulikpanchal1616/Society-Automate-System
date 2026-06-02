@@ -33,7 +33,7 @@ export default async function OfficeWaterPage({ searchParams }: PageProps) {
 
   // Calculate entry statistics
   const totalActive = houses.length
-  const recordedCount = houses.filter(h => h.water_entry !== null).length
+  const recordedCount = houses.filter((h: any) => h.water_entry !== null).length
   const progressPercent = totalActive > 0 ? Math.round((recordedCount / totalActive) * 100) : 0
 
   return (

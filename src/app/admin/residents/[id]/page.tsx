@@ -141,8 +141,8 @@ function InfoRow({
 }) {
   return (
     <div className="flex items-start gap-2">
-      <span className="text-slate-500 text-xs w-24 shrink-0 pt-0.5">{label}</span>
-      <span className={`text-sm flex-1 ${mono ? 'font-mono' : ''} ${highlight ? 'text-indigo-300 font-semibold' : 'text-slate-200'}`}>
+      <span className="text-slate-600 font-medium text-xs w-24 shrink-0 pt-0.5">{label}</span>
+      <span className={`text-sm flex-1 ${mono ? 'font-mono' : ''} ${highlight ? 'text-[#C56E4D] font-bold' : 'text-[#2D2A26] font-semibold'}`}>
         {value}
       </span>
     </div>
