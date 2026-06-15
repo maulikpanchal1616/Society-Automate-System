@@ -5,6 +5,8 @@ import { getResidentBills } from '@/features/billing/queries'
 import { getResidentReceipts } from '@/features/receipts/queries'
 import { formatCurrency } from '@/lib/utils'
 import { format } from 'date-fns'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
+import OnlinePaymentButton from '@/features/payments/components/OnlinePaymentButton'
 
 export const metadata: Metadata = { title: 'Payments & Receipts' }
 
@@ -14,6 +16,13 @@ export default async function ResidentPaymentsPage() {
   if (!profile || profile.role !== 'resident' || !profile.house_id) {
     redirect('/login')
   }
+
+  const supabase = await createSupabaseServerClient()
+  const { data: society } = await supabase
+    .from('societies')
+    .select('name')
+    .eq('id', profile.society_id)
+    .maybeSingle()
 
   // Fetch all active bills (pending, overdue, paid)
   const bills = await getResidentBills(profile.house_id)
@@ -52,10 +61,16 @@ export default async function ResidentPaymentsPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-extrabold text-slate-800">{formatCurrency(bill.final_amount ?? 0)}</p>
-                  {/* Razorpay disabled for Phase 4 step 1 */}
-                  <button className="mt-1 text-[10px] font-bold px-3 py-1 bg-slate-200 text-slate-500 rounded-full cursor-not-allowed opacity-60">
-                    Pay Now
-                  </button>
+                  <OnlinePaymentButton
+                    billId={bill.id}
+                    amount={bill.final_amount ?? 0}
+                    billMonthName={format(new Date(bill.billing_month), 'MMMM yyyy')}
+                    residentName={profile.full_name || 'Resident'}
+                    residentPhone={profile.phone || ''}
+                    societyName={society?.name || 'Society'}
+                    className="mt-1 text-[10px] font-bold px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-all hover:scale-105"
+                    buttonText="Pay Now"
+                  />
                 </div>
               </div>
             ))}

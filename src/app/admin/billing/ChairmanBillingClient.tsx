@@ -173,7 +173,7 @@ export default function ChairmanBillingClient({
       const formData = new FormData()
       formData.append('billId', payBill.id)
       formData.append('expectedAmount', (payBill.final_amount ?? 0).toString())
-      
+
       const res = await recordCashPayment(formData)
       if (res.success) {
         setSuccessMessage(`Cash payment of ${formatCurrency(payBill.final_amount ?? 0)} recorded successfully.`)
@@ -264,18 +264,18 @@ export default function ChairmanBillingClient({
         {/* Month selector & Generation controls */}
         <div className="flex flex-wrap items-end gap-4 w-full md:w-auto shrink-0 justify-between md:justify-end">
           {totalCount === 0 && (
-             <button
-                onClick={handlePreviewBills}
-                disabled={isGenerating}
-                className="btn btn-primary px-4 py-2 text-xs font-bold shrink-0"
-             >
-                {isGenerating ? 'Preparing...' : 'Prepare Bills'}
-             </button>
+            <button
+              onClick={handlePreviewBills}
+              disabled={isGenerating}
+              className="btn btn-primary px-4 py-2 text-xs font-bold shrink-0"
+            >
+              {isGenerating ? 'Preparing...' : 'Prepare Bills'}
+            </button>
           )}
 
           <div className="flex items-end ml-auto md:ml-0">
-              <BillingMonthSelector 
-              activeMonth={activeMonth} 
+            <BillingMonthSelector
+              activeMonth={activeMonth}
               onChange={handleMonthChange}
               label="Billing Cycle"
             />
@@ -294,49 +294,49 @@ export default function ChairmanBillingClient({
               </div>
               <button onClick={() => setShowPreview(false)} className="text-slate-400 hover:text-slate-200">✕</button>
             </div>
-            
-            <div className="p-5 overflow-y-auto space-y-4">
-               {modalError && (
-                 <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs rounded-lg">
-                   {modalError}
-                 </div>
-               )}
-               
-               <div className="grid grid-cols-2 gap-3">
-                  <div className="p-4 bg-slate-800/50 rounded-lg">
-                     <p className="text-[10px] uppercase text-slate-400 font-bold mb-1">Total Houses</p>
-                     <p className="text-xl font-bold text-slate-200">{previewData.totalHouses}</p>
-                  </div>
-                  <div className="p-4 bg-emerald-900/20 border border-emerald-900/30 rounded-lg">
-                     <p className="text-[10px] uppercase text-emerald-400/70 font-bold mb-1">Readings Logged</p>
-                     <p className="text-xl font-bold text-emerald-400">{previewData.housesWithWater}</p>
-                  </div>
-                  <div className={`p-4 rounded-lg col-span-2 ${previewData.housesMissingWater > 0 ? 'bg-amber-900/20 border border-amber-900/30' : 'bg-slate-800/50'}`}>
-                     <p className={`text-[10px] uppercase font-bold mb-1 ${previewData.housesMissingWater > 0 ? 'text-amber-400/70' : 'text-slate-400'}`}>Missing Water Readings</p>
-                     <p className={`text-xl font-bold ${previewData.housesMissingWater > 0 ? 'text-amber-400' : 'text-slate-200'}`}>{previewData.housesMissingWater}</p>
-                     {previewData.housesMissingWater > 0 && (
-                        <p className="text-[10px] text-amber-400/70 mt-1 mt-2 leading-relaxed">
-                           ⚠️ These {previewData.housesMissingWater} houses will be billed ₹0 for water. You can manually adjust them next month.
-                        </p>
-                     )}
-                  </div>
-               </div>
 
-               <div className="pt-4 border-t border-slate-800">
-                  <p className="text-[10px] uppercase text-slate-500 font-bold mb-3">Estimated Projections</p>
-                  <div className="flex justify-between items-center text-sm mb-2">
-                     <span className="text-slate-400">Total Maintenance:</span>
-                     <span className="font-mono text-slate-200">{formatCurrency(previewData.estimatedMaintenance)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm mb-2">
-                     <span className="text-slate-400">Total Water Charges:</span>
-                     <span className="font-mono text-slate-200">{formatCurrency(previewData.estimatedWater)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm font-bold pt-2 border-t border-slate-800">
-                     <span className="text-slate-300">Grand Total:</span>
-                     <span className="font-mono text-indigo-400">{formatCurrency(previewData.estimatedMaintenance + previewData.estimatedWater)}</span>
-                  </div>
-               </div>
+            <div className="p-5 overflow-y-auto space-y-4">
+              {modalError && (
+                <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs rounded-lg">
+                  {modalError}
+                </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-4 bg-slate-800/50 rounded-lg">
+                  <p className="text-[10px] uppercase text-slate-400 font-bold mb-1">Total Houses</p>
+                  <p className="text-xl font-bold text-slate-200">{previewData.totalHouses}</p>
+                </div>
+                <div className="p-4 bg-emerald-900/20 border border-emerald-900/30 rounded-lg">
+                  <p className="text-[10px] uppercase text-emerald-400/70 font-bold mb-1">Readings Logged</p>
+                  <p className="text-xl font-bold text-emerald-400">{previewData.housesWithWater}</p>
+                </div>
+                <div className={`p-4 rounded-lg col-span-2 ${previewData.housesMissingWater > 0 ? 'bg-amber-900/20 border border-amber-900/30' : 'bg-slate-800/50'}`}>
+                  <p className={`text-[10px] uppercase font-bold mb-1 ${previewData.housesMissingWater > 0 ? 'text-amber-400/70' : 'text-slate-400'}`}>Missing Water Readings</p>
+                  <p className={`text-xl font-bold ${previewData.housesMissingWater > 0 ? 'text-amber-400' : 'text-slate-200'}`}>{previewData.housesMissingWater}</p>
+                  {previewData.housesMissingWater > 0 && (
+                    <p className="text-[10px] text-amber-400/70 mt-1 mt-2 leading-relaxed">
+                      ⚠️ These {previewData.housesMissingWater} houses will be billed ₹0 for water. You can manually adjust them next month.
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-800">
+                <p className="text-[10px] uppercase text-slate-500 font-bold mb-3">Estimated Projections</p>
+                <div className="flex justify-between items-center text-sm mb-2">
+                  <span className="text-slate-400">Total Maintenance:</span>
+                  <span className="font-mono text-slate-200">{formatCurrency(previewData.estimatedMaintenance)}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm mb-2">
+                  <span className="text-slate-400">Total Water Charges:</span>
+                  <span className="font-mono text-slate-200">{formatCurrency(previewData.estimatedWater)}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm font-bold pt-2 border-t border-slate-800">
+                  <span className="text-slate-300">Grand Total:</span>
+                  <span className="font-mono text-indigo-400">{formatCurrency(previewData.estimatedMaintenance + previewData.estimatedWater)}</span>
+                </div>
+              </div>
             </div>
 
             <div className="p-5 border-t border-slate-800 bg-slate-900/50 flex justify-end gap-3">
@@ -377,10 +377,10 @@ export default function ChairmanBillingClient({
               {tab === 'all'
                 ? totalCount
                 : tab === 'unpaid'
-                ? unpaidCount
-                : tab === 'waived'
-                ? waivedCount
-                : paidCount}
+                  ? unpaidCount
+                  : tab === 'waived'
+                    ? waivedCount
+                    : paidCount}
               )
             </button>
           ))}
@@ -398,7 +398,7 @@ export default function ChairmanBillingClient({
               let badgeBg = 'rgba(183,155,108,0.1)'
               let badgeBorder = 'rgba(183,155,108,0.2)'
               let badgeText = '#B79B6C'
-              
+
               if (bill.status === 'paid') {
                 badgeBg = 'rgba(122,139,116,0.1)'
                 badgeBorder = 'rgba(122,139,116,0.2)'
@@ -441,8 +441,8 @@ export default function ChairmanBillingClient({
                       Maint: {formatCurrency(Number(bill.maintenance_amount))} | Water:{' '}
                       {bill.water_units !== null
                         ? `${Number(bill.water_units).toFixed(1)} units (${formatCurrency(
-                            Number(bill.water_bill_amount)
-                          )})`
+                          Number(bill.water_bill_amount)
+                        )})`
                         : 'N/A'}
                     </p>
                     {bill.penalty_waived && (
@@ -587,7 +587,7 @@ export default function ChairmanBillingClient({
                   </div>
                 </div>
               </div>
-              
+
               <p className="text-xs leading-relaxed" style={{ color: '#8C8680' }}>
                 By clicking confirm, you acknowledge that you have received <strong>{formatCurrency(payBill.final_amount ?? 0)}</strong> in cash. This will generate an immutable receipt and permanently mark the bill as paid.
               </p>

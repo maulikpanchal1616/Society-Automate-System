@@ -299,7 +299,7 @@ export async function getBillById(billId: string): Promise<BillWithDetails | nul
 
   const { data, error } = await supabase
     .from('bills')
-    .select('*, house:houses(*, block:blocks(id, name))')
+    .select('*, house:houses(*, block:blocks(id, name)), society:societies(*)')
     .eq('id', billId)
     .maybeSingle()
 

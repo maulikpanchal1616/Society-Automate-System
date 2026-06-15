@@ -10,6 +10,8 @@ import { getBillById } from '@/features/billing/queries'
 import { formatCurrency } from '@/lib/utils'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { calculateDynamicPenalty } from '@/lib/billing/calculator'
+import OnlinePaymentButton from '@/features/payments/components/OnlinePaymentButton'
+
 
 export const metadata: Metadata = { title: 'Bill Details' }
 
@@ -205,11 +207,16 @@ export default async function ResidentBillDetailPage({ params }: PageProps) {
           <p className="text-[10px] text-slate-400 leading-relaxed mb-4">
             Pay instantly using local UPI options (GPay, PhonePe, Paytm) or net banking. Transactions are signature-verified instantly.
           </p>
-          <button className="btn btn-primary w-full py-2.5 text-xs font-semibold opacity-85 hover:opacity-100 transition-opacity">
-            Pay Now {formatCurrency(total)}
-          </button>
+          <OnlinePaymentButton
+            billId={bill.id}
+            amount={total}
+            billMonthName={billMonthName}
+            residentName={profile.full_name || bill.house.owner_name || 'Resident'}
+            residentPhone={profile.phone || bill.house.primary_contact_phone || ''}
+            societyName={bill.society.name}
+          />
           <p className="text-[9px] text-slate-500 text-center mt-2.5">
-            🔒 High-security SSL Razorpay checkout gateway integration scaffolding active.
+            🔒 High-security SSL Razorpay checkout gateway integration active.
           </p>
         </div>
       ) : (

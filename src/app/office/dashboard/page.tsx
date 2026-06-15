@@ -98,7 +98,7 @@ async function OperationsContent({ societyId }: { societyId: string }) {
                   <p className="text-xs text-slate-500 mt-1 mb-3">
                     {opsData.overdueAccounts} houses have overdue payments past the late fee deadline.
                   </p>
-                  <a href="/office/bills" className="btn btn-secondary border border-slate-200 px-4 py-1.5 text-xs inline-block">Review Accounts</a>
+                  <a href="/office/billing" className="btn btn-secondary border border-slate-200 px-4 py-1.5 text-xs inline-block">Review Accounts</a>
                 </div>
               </div>
             )}
