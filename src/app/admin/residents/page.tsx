@@ -114,7 +114,7 @@ async function ResidentsContent({
         >
           All Blocks
         </Link>
-        {blocks.map((block) => (
+        {(blocks || []).map((block) => (
           <Link
             key={block.id}
             href={`/admin/residents?q=${search}&block=${block.id}&occupancy=${occupancy}`}
@@ -147,7 +147,7 @@ async function ResidentsContent({
         />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {houses.map((house) => (
+          {(houses || []).map((house) => (
             <Link
               key={house.id}
               href={`/admin/residents/${house.id}`}

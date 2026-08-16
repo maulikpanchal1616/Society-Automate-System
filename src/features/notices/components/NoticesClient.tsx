@@ -46,14 +46,14 @@ export default function NoticesClient({ initialNotices, isAdmin, currentUserId }
     if (!confirm('Are you sure you want to archive this notice?')) return
     const res = await archiveNotice(id)
     if (res.data) {
-      setNotices(notices.map(n => n.id === id ? { ...n, status: 'archived' } : n))
+      setNotices((notices || []).map(n => n.id === id ? { ...n, status: 'archived' } : n))
     }
   }
 
   const handlePublish = async (id: string) => {
     const res = await updateNotice(id, { status: 'published' })
     if (res.data) {
-      setNotices(notices.map(n => n.id === id ? { ...n, status: 'published' } : n))
+      setNotices((notices || []).map(n => n.id === id ? { ...n, status: 'published' } : n))
     }
   }
 
@@ -97,7 +97,7 @@ export default function NoticesClient({ initialNotices, isAdmin, currentUserId }
               </button>
             ))}
           </div>
-          <div className="hidden sm:block flex-1" />
+          <div className="w-full sm:w-auto flex-1" />
           <button
             onClick={() => { setEditingNotice(null); setIsFormOpen(true) }}
             className="flex items-center justify-center gap-2 px-4 py-2 mb-2 w-full sm:w-auto rounded-lg text-white font-semibold text-sm transition-opacity"
@@ -129,7 +129,7 @@ export default function NoticesClient({ initialNotices, isAdmin, currentUserId }
               <p className="text-[#8C8680]">No {activeTab} notices found.</p>
             </div>
           ) : (
-            filteredNotices.map((notice) => {
+            (filteredNotices || []).map((notice) => {
               const canEdit = isAdmin || notice.published_by === currentUserId
 
               return (

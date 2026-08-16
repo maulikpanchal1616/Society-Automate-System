@@ -50,7 +50,7 @@ export default async function ResidentPaymentsPage() {
 
         {unpaidBills.length > 0 ? (
           <div className="mt-5 space-y-3">
-            {unpaidBills.map(bill => (
+            {(unpaidBills || []).map(bill => (
               <div key={bill.id} className="p-3 bg-white/60 rounded-xl border border-slate-200 flex justify-between items-center">
                 <div>
                   <p className="text-sm font-bold text-slate-800">{format(new Date(bill.billing_month), 'MMMM yyyy')} Bill</p>
@@ -89,7 +89,7 @@ export default async function ResidentPaymentsPage() {
         
         {receipts.length > 0 ? (
           <div className="space-y-3">
-            {receipts.map(receipt => (
+            {(receipts || []).map(receipt => (
               <div key={receipt.id} className="glass-card p-4 rounded-xl flex items-center justify-between transition-all hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#7A8B74]/10 flex items-center justify-center shrink-0">

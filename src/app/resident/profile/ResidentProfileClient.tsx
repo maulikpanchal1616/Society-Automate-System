@@ -180,7 +180,7 @@ export default function ResidentProfileClient({ profile, house }: ProfileProps) 
       {/* ── House Information (read-only) ───────────────────────────────────── */}
       {house && (
         <SectionCard title="House Details" icon="🏠">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { label: 'House No.', value: house.house_number },
               { label: 'Block', value: `${house.block.name} Wing` },

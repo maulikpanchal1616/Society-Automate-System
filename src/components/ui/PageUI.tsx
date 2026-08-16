@@ -15,7 +15,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, action, className }: PageHeaderProps) {
   return (
-    <div className={cn('flex items-start justify-between gap-4 mb-6', className)}>
+    <div className={cn('flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 mt-2 mb-6 w-full', className)}>
       <div className="min-w-0">
         <h1 className="text-xl font-bold leading-tight" style={{ color: '#2D2A26' }}>{title}</h1>
         {subtitle && <p className="text-sm mt-0.5" style={{ color: '#8C8680' }}>{subtitle}</p>}

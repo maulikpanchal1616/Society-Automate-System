@@ -188,7 +188,7 @@ export default function FamilyMembersSection({ house }: Props) {
       {showForm && (
         <form onSubmit={handleAdd} className="border rounded-xl p-4 mb-4 space-y-3" style={{ borderColor: 'rgba(183,155,108,0.2)', background: 'rgba(183,155,108,0.04)' }}>
           <p className="text-sm font-medium" style={{ color: '#2D2A26' }}>Add Family Member</p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="col-span-2">
               <label className="label">Full Name</label>
               <input className="input text-sm" placeholder="Priya Patel" value={fullName}
@@ -244,7 +244,7 @@ export default function FamilyMembersSection({ house }: Props) {
         <EmptyState icon="👨‍👩‍👧" title="No family members" description="Add family members to this house." />
       ) : (
         <div className="space-y-2">
-          {members.map((member) => (
+          {(members || []).map((member) => (
             <div
               key={member.id}
               className="p-3 rounded-xl border transition-colors group"
@@ -254,10 +254,10 @@ export default function FamilyMembersSection({ house }: Props) {
               }
             >
               {/* Row 1: Name + badges */}
-              <div className="flex items-start justify-between">
-                <div className="flex-1 min-w-0">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-sm font-semibold truncate" style={{ color: '#2D2A26' }}>{member.full_name}</p>
+                    <p className="text-sm font-semibold break-words" style={{ color: '#2D2A26' }}>{member.full_name}</p>
                     {member.is_primary_contact && (
                       <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide shrink-0" style={{ color: '#C56E4D', background: 'rgba(197,110,77,0.1)', border: '1px solid rgba(197,110,77,0.2)' }}>
                         Primary
@@ -288,7 +288,7 @@ export default function FamilyMembersSection({ house }: Props) {
                 </div>
 
                 {/* Actions — always visible for touch devices */}
-                <div className="flex items-center gap-1 ml-2 shrink-0">
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto pt-2 sm:pt-0 shrink-0">
                   {!member.app_user_active && !member.app_user_id && (
                     <button
                       type="button"
@@ -302,13 +302,12 @@ export default function FamilyMembersSection({ house }: Props) {
                     </button>
                   )}
                   {member.app_user_active && member.app_user_id && (
-                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex flex-wrap items-center gap-1">
                       <button
                         type="button"
                         onClick={() => openResetModal(member)}
                         disabled={isPending}
-                        className="text-[11px] px-2 py-1 rounded-lg transition-colors"
-                        style={{ color: '#B79B6C' }}
+                        className="text-[11px] px-2 py-1 rounded-lg transition-colors font-medium text-amber-700 bg-amber-50 hover:bg-amber-100"
                         title="Reset app password"
                       >
                         Reset Password
@@ -317,8 +316,7 @@ export default function FamilyMembersSection({ house }: Props) {
                         type="button"
                         onClick={() => handleRevoke(member)}
                         disabled={isPending}
-                        className="text-[11px] px-2 py-1 rounded-lg transition-colors"
-                        style={{ color: '#C56E4D' }}
+                        className="text-[11px] px-2 py-1 rounded-lg transition-colors font-medium text-red-600 bg-red-50 hover:bg-red-100"
                         title="Revoke app access"
                       >
                         Revoke
@@ -330,8 +328,7 @@ export default function FamilyMembersSection({ house }: Props) {
                       type="button"
                       onClick={() => handleSetPrimary(member)}
                       disabled={isPending}
-                      className="text-[11px] px-2 py-1 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
-                      style={{ color: '#B79B6C' }}
+                      className="text-[11px] px-2 py-1 rounded-lg transition-colors font-medium text-amber-700 bg-amber-50 hover:bg-amber-100"
                       title="Set as primary contact"
                     >
                       Primary
@@ -342,8 +339,7 @@ export default function FamilyMembersSection({ house }: Props) {
                       type="button"
                       onClick={() => handleDelete(member)}
                       disabled={isPending}
-                      className="text-[11px] px-2 py-1 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
-                      style={{ color: '#C56E4D' }}
+                      className="text-[11px] px-2 py-1 rounded-lg transition-colors font-medium text-red-600 bg-red-50 hover:bg-red-100"
                       title="Remove member"
                     >
                       ✕

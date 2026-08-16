@@ -97,7 +97,7 @@ export default function SocietySettingsForm({ society }: Props) {
       {/* Payment Window */}
       <div>
         <label className="label">Payment Window (day of month)</label>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="text-xs mb-1 block" style={{ color: '#8C8680' }}>Start Day</label>
             <input

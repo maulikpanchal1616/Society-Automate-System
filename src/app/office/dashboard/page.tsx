@@ -50,7 +50,7 @@ async function OperationsContent({ societyId }: { societyId: string }) {
   return (
     <>
       {/* KPI Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard label="Pending Water Entry" value={opsData.waterReadingsPending.toString()} accent="#B79B6C" />
         <StatCard label="Bills Generated" value={opsData.billsGenerated.toString()} accent="#8C8680" />
         <StatCard label="Cash Collected Today" value={formatCurrency(opsData.cashCollectedToday)} accent="#7A8B74" />
@@ -117,7 +117,7 @@ async function OperationsContent({ societyId }: { societyId: string }) {
               <div className="text-center py-8 text-slate-400 text-sm">No recent activity</div>
             ) : (
               <div className="relative border-l-2 border-slate-100 ml-3 pl-5 space-y-6">
-                {opsData.recentActivity.map((log: any) => (
+                {(opsData?.recentActivity || []).map((log: any) => (
                   <div key={log.id} className="relative">
                     <div className="absolute -left-[27px] top-1 p-1 bg-white border border-slate-100 rounded-full">
                       <ActionIcon type={log.action_type} />

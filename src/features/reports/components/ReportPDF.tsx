@@ -31,15 +31,15 @@ export function ReportPDF({ title, data, columns }: { title: string, data: any[]
 
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            {columns.map((col, i) => (
+            {(columns || []).map((col, i) => (
               <View style={{ ...styles.tableColHeader, width: `${100 / columns.length}%` }} key={i}>
                 <Text style={styles.tableCellHeader}>{col}</Text>
               </View>
             ))}
           </View>
-          {data.map((row, i) => (
+          {(data || []).map((row, i) => (
             <View style={styles.tableRow} key={i}>
-              {columns.map((col, j) => {
+              {(columns || []).map((col, j) => {
                 const val = row[col.toLowerCase()]
                 const displayVal = typeof val === 'number' ? formatCurrency(val) : String(val || '-')
                 return (

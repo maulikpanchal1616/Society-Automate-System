@@ -81,7 +81,7 @@ export default function WaterRateSection({ activeRate, history }: Props) {
           <p className="text-xs rounded-lg px-3 py-2" style={{ color: '#9E8357', background: 'rgba(183,155,108,0.08)', border: '1px solid rgba(183,155,108,0.2)' }}>
             ⚠ Setting a new rate will automatically close the current active rate.
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="label">Price per Unit (₹)</label>
               <div className="relative">
@@ -124,7 +124,7 @@ export default function WaterRateSection({ activeRate, history }: Props) {
           <EmptyState icon="💧" title="No water rates configured" description="Add the first water rate above." />
         ) : (
           <div className="space-y-2">
-            {history.map((rate) => (
+            {(history || []).map((rate) => (
               <div key={rate.id} className="flex items-center justify-between py-2.5 px-3 rounded-lg border" style={{ borderColor: 'rgba(183,155,108,0.15)', background: 'rgba(255,255,255,0.4)' }}>
                 <div>
                   <span className="font-semibold" style={{ color: '#2D2A26' }}>{formatCurrency(rate.price_per_unit)}/unit</span>

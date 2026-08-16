@@ -15,12 +15,12 @@ import type { UserRole } from '@/types/roles'
 export const getCurrentUser = cache(async () => {
   const supabase = await createSupabaseServerClient()
   const {
-    data: { session },
+    data: { user },
     error,
-  } = await supabase.auth.getSession()
+  } = await supabase.auth.getUser()
 
-  if (error || !session?.user) return null
-  return session.user
+  if (error || !user) return null
+  return user
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -31,11 +31,11 @@ export const getCurrentUserProfile = cache(async (): Promise<UserProfile | null>
   const supabase = await createSupabaseServerClient()
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession()
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser()
 
-  if (!session?.user) return null
-  const user = session.user
+  if (userError || !user) return null
 
   const { data, error } = await supabase
     .from('users')

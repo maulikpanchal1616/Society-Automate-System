@@ -105,7 +105,7 @@ export default function WaterEntryClient({
       {/* Month Dropdown & Progress Summary */}
       <div className="glass-card p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
-          <div className="hidden sm:block">
+          <div className="w-full sm:w-auto flex-1">
             {/* Keeping flex layout balanced */}
           </div>
           <BillingMonthSelector 
@@ -147,7 +147,7 @@ export default function WaterEntryClient({
 
       {/* House List Card Grid */}
       <div className="space-y-4">
-        {houses.map((house) => {
+        {(houses || []).map((house) => {
           const isEditing = editingHouseId === house.id
           const hasEntry = house.water_entry !== null
           const residentName = house.tenant_name || house.owner_name

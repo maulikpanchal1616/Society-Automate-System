@@ -38,7 +38,7 @@ export default async function ResidentBillsPage() {
             <p className="text-slate-400 text-xs mt-1">There are no bills published for your house yet.</p>
           </div>
         ) : (
-          bills.map((bill) => {
+          (bills || []).map((bill) => {
             const billMonthName = new Date(bill.billing_month).toLocaleDateString('en-US', {
               month: 'long',
               year: 'numeric',

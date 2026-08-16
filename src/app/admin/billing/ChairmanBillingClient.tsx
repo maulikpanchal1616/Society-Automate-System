@@ -302,7 +302,7 @@ export default function ChairmanBillingClient({
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-4 bg-slate-800/50 rounded-lg">
                   <p className="text-[10px] uppercase text-slate-400 font-bold mb-1">Total Houses</p>
                   <p className="text-xl font-bold text-slate-200">{previewData.totalHouses}</p>
@@ -393,7 +393,7 @@ export default function ChairmanBillingClient({
               No bills found matching search and filters.
             </div>
           ) : (
-            filteredBills.map((bill) => {
+            (filteredBills || []).map((bill) => {
               // Get badge styles based on exact globals.css tokens
               let badgeBg = 'rgba(183,155,108,0.1)'
               let badgeBorder = 'rgba(183,155,108,0.2)'

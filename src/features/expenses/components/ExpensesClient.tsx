@@ -5,6 +5,7 @@ import { Plus, Search, FileText, CheckCircle, Lock, Trash2, Edit2 } from 'lucide
 import { formatCurrency } from '@/lib/utils'
 import { changeExpenseStatusAction, deleteExpenseAction } from '../actions'
 import ExpenseFormDialog from './ExpenseFormDialog'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 
 export default function ExpensesClient({ initialExpenses, userRole }: { initialExpenses: any[], userRole: string }) {
   const [expenses, setExpenses] = useState(initialExpenses)
@@ -73,16 +74,17 @@ export default function ExpensesClient({ initialExpenses, userRole }: { initialE
               onChange={e => setSearchTerm(e.target.value)}
             />
           </div>
-          <select 
-            className="px-3 py-2.5 rounded-lg border border-slate-200 text-sm bg-white w-full sm:w-auto shrink-0 text-slate-800"
+          <CustomSelect 
+            className="w-full sm:w-40 shrink-0"
             value={filterStatus}
             onChange={e => setFilterStatus(e.target.value)}
-          >
-            <option value="all">All Status</option>
-            <option value="draft">Drafts</option>
-            <option value="approved">Approved</option>
-            <option value="locked">Locked</option>
-          </select>
+            options={[
+              { value: 'all', label: 'All Status' },
+              { value: 'draft', label: 'Drafts' },
+              { value: 'approved', label: 'Approved' },
+              { value: 'locked', label: 'Locked' },
+            ]}
+          />
         </div>
         <div className="text-left sm:text-right w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-0 border-slate-200">
           <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Filtered Total</p>
@@ -109,7 +111,7 @@ export default function ExpensesClient({ initialExpenses, userRole }: { initialE
                     No expense records found.
                   </td>
                 </tr>
-              ) : filtered.map(expense => (
+              ) : (filtered || []).map(expense => (
                 <tr key={expense.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4">
                     <p className="font-semibold text-slate-800">{expense.title}</p>

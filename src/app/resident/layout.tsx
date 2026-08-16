@@ -108,7 +108,7 @@ export default async function ResidentLayout({
         </div>
       </div>
 
-      <main className="flex-1 min-w-0 lg:ml-64 pb-20 lg:pb-0 pt-[4.5rem] lg:pt-6 md:p-6 lg:p-8 max-w-full">
+      <main className="flex-1 min-w-0 lg:ml-64 p-4 pt-20 md:p-6 md:pt-24 lg:p-8 lg:pt-8 pb-20 lg:pb-8 max-w-full">
         {children}
       </main>
 

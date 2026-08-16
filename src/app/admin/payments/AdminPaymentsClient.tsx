@@ -216,7 +216,7 @@ export default function AdminPaymentsClient({
                 No invoices found in this category.
               </div>
             ) : (
-              filteredBills.map((bill) => {
+              (filteredBills || []).map((bill) => {
                 let badgeClass = 'badge-pending'
                 if (bill.status === 'paid') badgeClass = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                 else if (bill.status === 'overdue') badgeClass = 'bg-rose-500/20 text-rose-300 border border-rose-500/30'

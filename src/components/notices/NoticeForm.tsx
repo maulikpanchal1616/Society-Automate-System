@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createNotice, updateNotice } from '@/features/notices/actions'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 
 const schema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -93,49 +94,49 @@ export default function NoticeForm({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold mb-1" style={{ color: '#2D2A26' }}>Type</label>
-          <select 
+          <CustomSelect 
             {...register('type')} 
-            className="w-full p-2.5 rounded-lg border focus:ring-2 focus:outline-none" 
-            style={{ borderColor: 'rgba(183,155,108,0.3)', backgroundColor: '#F5F1EB' }}
-          >
-            <option value="general">General</option>
-            <option value="maintenance">Maintenance</option>
-            <option value="payment_reminder">Payment Reminder</option>
-            <option value="emergency">Emergency</option>
-            <option value="meeting">Meeting</option>
-            <option value="festival">Festival</option>
-          </select>
+            className="w-full bg-[#F5F1EB] rounded-lg border-transparent focus-within:ring-0 focus-within:border-transparent"
+            options={[
+              { value: 'general', label: 'General' },
+              { value: 'maintenance', label: 'Maintenance' },
+              { value: 'payment_reminder', label: 'Payment Reminder' },
+              { value: 'emergency', label: 'Emergency' },
+              { value: 'meeting', label: 'Meeting' },
+              { value: 'festival', label: 'Festival' },
+            ]}
+          />
         </div>
         
         <div>
           <label className="block text-sm font-semibold mb-1" style={{ color: '#2D2A26' }}>Priority</label>
-          <select 
+          <CustomSelect 
             {...register('priority')} 
-            className="w-full p-2.5 rounded-lg border focus:ring-2 focus:outline-none" 
-            style={{ borderColor: 'rgba(183,155,108,0.3)', backgroundColor: '#F5F1EB' }}
-          >
-            <option value="normal">Normal</option>
-            <option value="important">Important</option>
-            <option value="emergency">Emergency</option>
-          </select>
+            className="w-full bg-[#F5F1EB] rounded-lg border-transparent focus-within:ring-0 focus-within:border-transparent"
+            options={[
+              { value: 'normal', label: 'Normal' },
+              { value: 'important', label: 'Important' },
+              { value: 'emergency', label: 'Emergency' },
+            ]}
+          />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold mb-1" style={{ color: '#2D2A26' }}>Audience</label>
-          <select 
+          <CustomSelect 
             {...register('audience')} 
-            className="w-full p-2.5 rounded-lg border focus:ring-2 focus:outline-none" 
-            style={{ borderColor: 'rgba(183,155,108,0.3)', backgroundColor: '#F5F1EB' }}
-          >
-            <option value="all">All Residents</option>
-            <option value="admin_only">Admins Only</option>
-            <option value="block_specific">Block Specific</option>
-          </select>
+            className="w-full bg-[#F5F1EB] rounded-lg border-transparent focus-within:ring-0 focus-within:border-transparent"
+            options={[
+              { value: 'all', label: 'All Residents' },
+              { value: 'admin_only', label: 'Admins Only' },
+              { value: 'block_specific', label: 'Block Specific' },
+            ]}
+          />
         </div>
         
         <div>
@@ -151,14 +152,14 @@ export default function NoticeForm({
       
       <div>
         <label className="block text-sm font-semibold mb-1" style={{ color: '#2D2A26' }}>Status</label>
-        <select 
+        <CustomSelect 
           {...register('status')} 
-          className="w-full p-2.5 rounded-lg border focus:ring-2 focus:outline-none" 
-          style={{ borderColor: 'rgba(183,155,108,0.3)', backgroundColor: '#F5F1EB' }}
-        >
-          <option value="draft">Save as Draft</option>
-          <option value="published">Publish Immediately</option>
-        </select>
+          className="w-full bg-[#F5F1EB] rounded-lg border-transparent focus-within:ring-0 focus-within:border-transparent"
+          options={[
+            { value: 'draft', label: 'Save as Draft' },
+            { value: 'published', label: 'Publish Immediately' },
+          ]}
+        />
       </div>
 
       <div className="flex items-center justify-end gap-3 pt-4 border-t" style={{ borderColor: 'rgba(183,155,108,0.2)' }}>

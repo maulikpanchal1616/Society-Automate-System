@@ -12,7 +12,7 @@ export function DashboardSkeleton() {
       </div>
 
       {/* Main KPI Row Skeleton */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="glass-card p-6 rounded-2xl h-32 flex flex-col justify-center">
             <div className="h-4 bg-black/5 rounded w-1/2 mb-3"></div>

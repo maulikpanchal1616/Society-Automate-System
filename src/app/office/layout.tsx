@@ -76,13 +76,13 @@ export default async function OfficeLayout({
           </Link>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold px-2 py-0.5 rounded-full hidden sm:inline-block" style={{ color: '#B79B6C', background: 'rgba(183,155,108,0.1)' }}>Office</span>
+          <span className="text-xs font-semibold px-2 py-0.5 rounded-full inline-block" style={{ color: '#B79B6C', background: 'rgba(183,155,108,0.1)' }}>Office</span>
           <SignOutButton compact />
         </div>
       </div>
 
       <main className="flex-1 min-w-0 lg:ml-64">
-        <div className="p-4 pt-[4.5rem] lg:pt-6 md:p-6 lg:p-8 max-w-full">
+        <div className="p-4 pt-20 md:p-6 md:pt-24 lg:p-8 lg:pt-8 max-w-full">
           {children}
         </div>
       </main>

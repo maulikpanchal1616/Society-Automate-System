@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { expenseFormSchema, ExpenseFormValues } from '../schemas'
 import { createExpenseAction, updateExpenseAction } from '../actions'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 
 export default function ExpenseFormDialog({ 
   isOpen, 
@@ -81,21 +82,24 @@ export default function ExpenseFormDialog({
             {errors.title && <p className="text-xs text-red-500 mt-1">{errors.title.message}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Category</label>
-              <select {...register('category')} className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm">
-                <option value="">Select...</option>
-                <option value="Maintenance">Maintenance</option>
-                <option value="Repairs">Repairs</option>
-                <option value="Staff Salary">Staff Salary</option>
-                <option value="Security">Security</option>
-                <option value="Water Supply">Water Supply</option>
-                <option value="Electricity">Electricity</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="Vendor Payments">Vendor Payments</option>
-                <option value="Other">Other</option>
-              </select>
+              <CustomSelect 
+                {...register('category')} 
+                className="w-full"
+                options={[
+                  { value: "Maintenance", label: "Maintenance" },
+                  { value: "Repairs", label: "Repairs" },
+                  { value: "Staff Salary", label: "Staff Salary" },
+                  { value: "Security", label: "Security" },
+                  { value: "Water Supply", label: "Water Supply" },
+                  { value: "Electricity", label: "Electricity" },
+                  { value: "Cleaning", label: "Cleaning" },
+                  { value: "Vendor Payments", label: "Vendor Payments" },
+                  { value: "Other", label: "Other" },
+                ]}
+              />
               {errors.category && <p className="text-xs text-red-500 mt-1">{errors.category.message}</p>}
             </div>
             <div>
@@ -105,7 +109,7 @@ export default function ExpenseFormDialog({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Date</label>
               <input type="date" {...register('expense_date')} className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm" />
@@ -113,13 +117,17 @@ export default function ExpenseFormDialog({
             </div>
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Payment Mode</label>
-              <select {...register('payment_mode')} className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm">
-                <option value="cash">Cash</option>
-                <option value="upi">UPI</option>
-                <option value="bank_transfer">Bank Transfer</option>
-                <option value="cheque">Cheque</option>
-                <option value="other">Other</option>
-              </select>
+              <CustomSelect 
+                {...register('payment_mode')} 
+                className="w-full"
+                options={[
+                  { value: "cash", label: "Cash" },
+                  { value: "upi", label: "UPI" },
+                  { value: "bank_transfer", label: "Bank Transfer" },
+                  { value: "cheque", label: "Cheque" },
+                  { value: "other", label: "Other" },
+                ]}
+              />
             </div>
           </div>
 

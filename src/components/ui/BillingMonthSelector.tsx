@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { CustomSelect } from './CustomSelect'
 
 interface BillingMonthSelectorProps {
   activeMonth: string // Format: YYYY-MM-01
@@ -22,7 +23,7 @@ export function BillingMonthSelector({
   const currentYear = new Date().getFullYear()
   const yearOptions = []
   for (let y = 2025; y <= currentYear + 1; y++) {
-    yearOptions.push(y)
+    yearOptions.push({ value: y, label: String(y) })
   }
 
   // Generate Month Options: 1 to 12
@@ -30,6 +31,10 @@ export function BillingMonthSelector({
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ]
+  const monthOptions = monthNames.map((name, index) => ({
+    value: index + 1,
+    label: name
+  }))
 
   const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newYear = e.target.value
@@ -51,29 +56,19 @@ export function BillingMonthSelector({
         </label>
       )}
       <div className="flex flex-row items-center gap-2">
-        <select
+        <CustomSelect
           value={activeMonthNum}
           onChange={handleMonthChange}
-          className="input text-sm bg-white border-slate-200 text-[#2D2A26] flex-1 min-w-[120px] focus:border-[#B79B6C] focus:ring-1 focus:ring-[#B79B6C] rounded-md shadow-sm"
-        >
-          {monthNames.map((name, index) => (
-            <option key={index + 1} value={index + 1}>
-              {name}
-            </option>
-          ))}
-        </select>
+          options={monthOptions}
+          className="min-w-[120px] flex-1"
+        />
 
-        <select
+        <CustomSelect
           value={activeYear}
           onChange={handleYearChange}
-          className="input text-sm bg-white border-slate-200 text-[#2D2A26] min-w-[90px] focus:border-[#B79B6C] focus:ring-1 focus:ring-[#B79B6C] rounded-md shadow-sm"
-        >
-          {yearOptions.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+          options={yearOptions}
+          className="min-w-[90px]"
+        />
       </div>
     </div>
   )

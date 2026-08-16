@@ -82,7 +82,7 @@ export default function ReportsClient({
 
             <div className="mt-8">
               <h3 className="text-sm font-bold text-[#2D2A26] mb-4">Expense Breakdown</h3>
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
+              <div className="border border-slate-200 rounded-lg overflow-hidden overflow-x-auto">
                 <table className="w-full text-left text-sm">
                   <thead className="bg-[#F5F1EB] text-[#8C8680] text-xs uppercase">
                     <tr>
@@ -93,7 +93,7 @@ export default function ReportsClient({
                   <tbody className="divide-y divide-slate-100">
                     {summaryData.expenseBreakdown.length === 0 ? (
                       <tr><td colSpan={2} className="px-4 py-8 text-center text-slate-500">No expenses recorded</td></tr>
-                    ) : summaryData.expenseBreakdown.map((e: any, i: number) => (
+                    ) : (summaryData?.expenseBreakdown || []).map((e: any, i: number) => (
                       <tr key={i} className="hover:bg-slate-50">
                         <td className="px-4 py-3 text-slate-700">{e.category}</td>
                         <td className="px-4 py-3 text-slate-900 font-medium text-right">{formatCurrency(e.amount)}</td>
@@ -123,7 +123,7 @@ export default function ReportsClient({
                 <tbody className="divide-y divide-slate-100">
                   {collectionData.length === 0 ? (
                     <tr><td colSpan={5} className="px-4 py-8 text-center text-slate-500">No collections found</td></tr>
-                  ) : collectionData.map((row: any, i: number) => (
+                  ) : (collectionData || []).map((row: any, i: number) => (
                     <tr key={i} className="hover:bg-slate-50">
                       <td className="px-4 py-3 text-slate-600 font-mono text-xs">{row.receipt}</td>
                       <td className="px-4 py-3 text-slate-600">{new Date(row.date).toLocaleDateString('en-IN')}</td>
@@ -155,7 +155,7 @@ export default function ReportsClient({
                 <tbody className="divide-y divide-slate-100">
                   {outstandingData.length === 0 ? (
                     <tr><td colSpan={5} className="px-4 py-8 text-center text-slate-500">All dues cleared!</td></tr>
-                  ) : outstandingData.map((row: any, i: number) => (
+                  ) : (outstandingData || []).map((row: any, i: number) => (
                     <tr key={i} className="hover:bg-slate-50">
                       <td className="px-4 py-3 text-slate-900 font-medium">{row.house}</td>
                       <td className="px-4 py-3 text-slate-600">{row.contact || '-'}</td>

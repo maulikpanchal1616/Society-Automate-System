@@ -7,7 +7,8 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { createHouse, updateHouse } from '@/features/residents/actions'
-import { AlertBanner, FormError } from '@/components/ui/PageUI'
+import { PageHeader, EmptyState, AlertBanner, FormError } from '@/components/ui/PageUI'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import type { Block, House } from '@/types/database'
 
 interface Props {
@@ -118,16 +119,12 @@ export default function HouseForm({ blocks, mode, house, redirectBase = '/admin/
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="label">Block / Wing</label>
-            <select
-              className="input"
+            <CustomSelect
+              className="w-full bg-white"
               value={blockId}
               onChange={(e) => setBlockId(e.target.value)}
-              required
-            >
-              {blocks.map((b) => (
-                <option key={b.id} value={b.id}>{b.name} Block</option>
-              ))}
-            </select>
+              options={(blocks || []).map(b => ({ value: b.id, label: `${b.name} Block` }))}
+            />
           </div>
           <div>
             <label className="label">House / Flat Number</label>
@@ -178,8 +175,8 @@ export default function HouseForm({ blocks, mode, house, redirectBase = '/admin/
       {/* ── Occupancy ── */}
       <div>
         <label className="label">Occupancy Status</label>
-        <div className="grid grid-cols-3 gap-2">
-          {occupancyOptions.map((opt) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {(occupancyOptions || []).map((opt) => (
             <button
               key={opt.value}
               type="button"

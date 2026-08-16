@@ -102,7 +102,7 @@ export default function ResidentNoticesClient({ initialNotices, currentUserId }:
   }, [initialNotices])
 
   // Unique notice types for filter chips
-  const types = ['all', ...Array.from(new Set(notices.map((n) => n.type)))]
+  const types = ['all', ...Array.from(new Set((notices || []).map((n) => n.type)))]
 
   const filtered = notices.filter((n) => {
     const matchSearch =
@@ -135,7 +135,7 @@ export default function ResidentNoticesClient({ initialNotices, currentUserId }:
 
         {/* Type filter chips — horizontal scroll on mobile */}
         <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
-          {types.map((type) => (
+          {(types || []).map((type) => (
             <button
               key={type}
               onClick={() => setFilterType(type)}
@@ -173,7 +173,7 @@ export default function ResidentNoticesClient({ initialNotices, currentUserId }:
         </div>
       ) : (
         <div className="space-y-3">
-          {sorted.map((notice) => {
+          {(sorted || []).map((notice) => {
             const pConfig = PRIORITY_CONFIG[notice.priority] || PRIORITY_CONFIG.normal
             const isExpanded = expanded === notice.id
             const isExpiring =
